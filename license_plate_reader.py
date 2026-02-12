@@ -67,7 +67,7 @@ def enhance_image(img):
     return clahe.apply(gray)
 
 
-def license_plate_reader(image_path):
+def read_license_plate(image_path):
     """
     Main function to read Saudi license plate from an image.
 
@@ -182,7 +182,7 @@ def get_license_plate(image_path):
     Example of using the license plate reader in your own application.
     """
 
-    result, [original_img, numbers_crop, letters_crop] = license_plate_reader(image_path)
+    result, [original_img, numbers_crop, letters_crop] = read_license_plate(image_path)
 
     # Check if processing was successful
     if "error" in result:
@@ -195,7 +195,37 @@ def get_license_plate(image_path):
     return json.dumps(result, indent=2, ensure_ascii=False)
 
 
-image_path = "/home/ali/Desktop/ckictw05s0001246aeel6cew4.jpeg"
-result, _ = license_plate_reader(image_path)
-print(result)
-print(json.dumps(result, indent=2, ensure_ascii=False))
+# ... (rest of your code above remains the same)
+
+# 7. JSON RESPONSE
+    response = {
+        "status": "success",
+        "data": {
+            "english": {
+                "letters": final_letters,
+                "numbers": final_numbers,
+                "full": f"{final_numbers} {final_letters}"
+            },
+            "arabic": {
+                "letters": arb_lets_str,
+                "numbers": arb_nums_str,
+                "full": f"{arb_nums_str}   {arb_lets_str}"
+            }
+        }
+    }
+
+    return response, [original, clean_L_Numbers, clean_R_Letters]
+
+# ==========================================
+# TEST CODE (Only runs if you execute this file directly)
+# ==========================================
+if __name__ == "__main__":
+    # Test path (Change this to a real image on your desktop for testing)
+    test_image_path = "/home/ali/Desktop/test_plate.jpeg" 
+    
+    if os.path.exists(test_image_path):
+        print(f"Testing on: {test_image_path}")
+        result, _ = read_license_plate(test_image_path)
+        print(json.dumps(result, indent=2, ensure_ascii=False))
+    else:
+        print("Test image not found. Please update 'test_image_path' to test.")
