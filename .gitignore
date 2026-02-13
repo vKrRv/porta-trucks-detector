@@ -1,0 +1,41 @@
+# Model files (too large for GitHub)
+*.pt
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# Output files
+final_output.mp4
+heavy_truck_crops/
+temp_plate_*.jpg
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test files
+test.mp4
+*.avi
+
+# Archive files
+*.rar
+*.zip
+*.7z
+*.tar
+*.gz
